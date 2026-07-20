@@ -3,6 +3,14 @@
 // in one place without touching the components.
 // ============================================================
 
+// RSVP form delivery.
+// Leave empty ('') to just show the local "thank you" confirmation.
+// To actually RECEIVE responses, create a free form at https://formspree.io
+// (or https://getform.io) and paste its endpoint URL here, e.g.:
+//   rsvpEndpoint: 'https://formspree.io/f/abcdwxyz'
+// Submissions then arrive by email — no server needed.
+export const rsvpEndpoint = ''
+
 export const couple = {
   bride: 'Maria',
   groom: 'Gonçalo',

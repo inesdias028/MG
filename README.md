@@ -38,9 +38,16 @@ them as `./img/cerimonia.jpg`. Placeholders are used in:
 
 ## Wiring up the RSVP form
 
-`src/components/GiftsRSVP.jsx` currently confirms the RSVP locally. To receive
-submissions, POST the `form` object to a service such as
-[Formspree](https://formspree.io) or a Google Form in the `submit` handler.
+The form works out of the box (it shows a local "thank you"). To actually
+**receive** the responses by e-mail — no server required:
+
+1. Create a free form at [Formspree](https://formspree.io) (or
+   [Getform](https://getform.io)). You'll get an endpoint URL like
+   `https://formspree.io/f/abcdwxyz`.
+2. Paste it into `rsvpEndpoint` at the top of `src/data/content.js`.
+3. Commit & push — the deploy workflow rebuilds automatically.
+
+Submissions then land in your inbox. Nothing else to change.
 
 ## Design tokens
 
@@ -49,5 +56,16 @@ Colours and fonts are defined as CSS variables in `src/index.css`
 
 ## Deploy (GitHub Pages)
 
-`vite.config.js` uses `base: './'` so the `dist/` build works from any path.
-Push `dist/` to a `gh-pages` branch, or use any static host (Netlify, Vercel).
+This repo ships a GitHub Actions workflow (`.github/workflows/deploy.yml`) that
+builds and publishes the site on every push to `main`.
+
+**One-time setup:** on GitHub go to **Settings → Pages → Build and deployment →
+Source** and choose **GitHub Actions**. The next push (or a manual run from the
+**Actions** tab) publishes the site to:
+
+```
+https://inesdias028.github.io/MG/
+```
+
+`vite.config.js` uses `base: './'` so the build also works from any other static
+host (Netlify, Vercel) with no changes.

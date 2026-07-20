@@ -1,26 +1,52 @@
 import { useState } from 'react'
-import { gifts } from '../data/content.js'
+import { gifts, rsvpEndpoint } from '../data/content.js'
 import { Gift, Heart } from './Icons.jsx'
 import { RopeDivider } from './Decor.jsx'
 
 export default function GiftsRSVP() {
   const [sent, setSent] = useState(false)
+  const [sending, setSending] = useState(false)
   const [copied, setCopied] = useState(false)
   const [form, setForm] = useState({ name: '', guests: '1', diet: '', message: '' })
   const [error, setError] = useState('')
 
   const update = (k) => (e) => setForm((f) => ({ ...f, [k]: e.target.value }))
 
-  const submit = (e) => {
+  const submit = async (e) => {
     e.preventDefault()
     if (!form.name.trim()) {
       setError('Por favor, indique o seu nome.')
       return
     }
     setError('')
-    // Static site: there is no backend yet. Wire this to Formspree / Google
-    // Forms / an email service by POSTing `form` here. For now we confirm locally.
-    setSent(true)
+
+    // No endpoint configured yet → just confirm locally (see content.js).
+    if (!rsvpEndpoint) {
+      setSent(true)
+      return
+    }
+
+    // Deliver the RSVP by e-mail via the configured form service (Formspree…).
+    setSending(true)
+    try {
+      const res = await fetch(rsvpEndpoint, {
+        method: 'POST',
+        headers: { Accept: 'application/json', 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          Nome: form.name,
+          'Nº de convidados': form.guests,
+          'Restrições alimentares': form.diet,
+          Mensagem: form.message,
+          _subject: `RSVP · ${form.name}`,
+        }),
+      })
+      if (!res.ok) throw new Error('bad status')
+      setSent(true)
+    } catch {
+      setError('Não foi possível enviar. Tente novamente ou contacte-nos diretamente.')
+    } finally {
+      setSending(false)
+    }
   }
 
   const copyIban = async () => {
@@ -90,7 +116,9 @@ export default function GiftsRSVP() {
                 <textarea rows="4" value={form.message} onChange={update('message')} placeholder="Mensagem (opcional)" />
               </label>
               {error && <p className="field__error">{error}</p>}
-              <button type="submit" className="btn rsvp__submit">Confirmar presença</button>
+              <button type="submit" className="btn rsvp__submit" disabled={sending}>
+                {sending ? 'A enviar…' : 'Confirmar presença'}
+              </button>
             </form>
           )}
         </div>
