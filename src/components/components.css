@@ -189,19 +189,27 @@
   background-position: center;
   background-repeat: no-repeat;
 }
-/* Lighten the top (behind the nav + names) and add a gentle base tint,
-   leaving the middle clear so the boat stays crisp. */
+/* A soft ivory halo behind the text (top-centre) makes the names stand out,
+   plus a light top band for the nav — while the middle stays clear so the
+   boat reads crisply. */
 .hero__scrim {
   position: absolute;
   inset: 0;
-  background: linear-gradient(
-    180deg,
-    rgba(248, 245, 239, 0.78) 0%,
-    rgba(248, 245, 239, 0.34) 22%,
-    rgba(248, 245, 239, 0) 44%,
-    rgba(248, 245, 239, 0) 78%,
-    rgba(248, 245, 239, 0.28) 100%
-  );
+  background:
+    radial-gradient(
+      95% 62% at 50% 24%,
+      rgba(248, 245, 239, 0.9) 0%,
+      rgba(248, 245, 239, 0.5) 42%,
+      rgba(248, 245, 239, 0) 70%
+    ),
+    linear-gradient(
+      180deg,
+      rgba(248, 245, 239, 0.7) 0%,
+      rgba(248, 245, 239, 0.2) 26%,
+      rgba(248, 245, 239, 0) 48%,
+      rgba(248, 245, 239, 0) 80%,
+      rgba(248, 245, 239, 0.28) 100%
+    );
 }
 .hero__content {
   position: relative;
@@ -216,26 +224,36 @@
 }
 .hero__names {
   margin: 0.2rem 0;
+  color: #7a5c3a;
+  text-shadow: 0 1px 1px rgba(255, 253, 249, 0.9), 0 6px 20px rgba(248, 245, 239, 0.85);
 }
 .hero__amp {
   font-size: 0.7em;
   color: var(--azul-escuro);
 }
+.hero__pre {
+  color: var(--corda-escuro);
+  text-shadow: 0 1px 8px rgba(248, 245, 239, 0.9);
+}
 .hero__date {
   font-family: var(--f-body);
   letter-spacing: 0.28em;
   text-transform: uppercase;
-  font-size: 0.82rem;
-  color: var(--texto-suave);
+  font-size: 0.86rem;
+  font-weight: 500;
+  color: #59544b;
   margin-top: 0.8rem;
+  text-shadow: 0 1px 8px rgba(248, 245, 239, 0.9);
 }
 .hero__place {
   font-family: var(--f-serif);
-  font-size: 1.15rem;
+  font-size: 1.2rem;
+  font-weight: 600;
   letter-spacing: 0.3em;
   text-transform: uppercase;
-  color: var(--azul-escuro);
+  color: #4a6274;
   margin-top: 0.2rem;
+  text-shadow: 0 1px 8px rgba(248, 245, 239, 0.9);
 }
 .hero__cta {
   margin-top: 2.2rem;
