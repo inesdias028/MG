@@ -165,12 +165,22 @@
   text-align: center;
   overflow: hidden;
 }
-/* Ivory backdrop that matches the watercolour's own background, so the
-   letterboxing around the contained image is invisible. */
+/* Backdrop sampled from the watercolour's own edge tones (warm ivory with a
+   faint horizon band ~28%), so the fill continues the image to full screen
+   width with an invisible seam. */
 .hero__fallback {
   position: absolute;
   inset: 0;
-  background: var(--marfim);
+  background: linear-gradient(
+    180deg,
+    #f3e9e0 0%,
+    #f4eae0 15%,
+    #e7dbcf 28%,
+    #f1e8df 45%,
+    #f2e8df 62%,
+    #f1e4db 80%,
+    #f2e4db 100%
+  );
 }
 .hero__bg {
   position: absolute;
