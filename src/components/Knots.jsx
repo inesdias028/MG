@@ -10,17 +10,24 @@
 // over/under gaps), the solid corda rope, and lighter twist bands.
 // ============================================================
 
-const ROPE = '#a88560'
-const ROPE_LT = '#c9ad88'
-const CASE = '#f6f1e8'
+// Realistic twisted-rope palette (corda family, shaded for a 3-D look).
+const ROPE_OUTLINE = '#6f5233' // dark casing / shadow under the rope
+const ROPE_BASE = '#ac8a62' // mid rope tone
+const ROPE_GROOVE = '#7d5c37' // dark grooves between the twists
+const ROPE_HI = '#e0cba2' // highlight catching the light on each twist
 
-// One rope strand rendered with casing + rope + twist bands.
-function Strand({ d, w = 6 }) {
+// One rope strand rendered as twisted rope: dark casing, base tone, then
+// alternating dark grooves and light highlights (dashed, half-phase apart)
+// that read as the diagonal twists of a real rope.
+function Strand({ d, w = 8 }) {
+  const dash = `${(w * 0.5).toFixed(1)} ${(w * 0.72).toFixed(1)}`
+  const off = (w * 0.61).toFixed(1)
   return (
     <>
-      <path d={d} stroke={CASE} strokeWidth={w + 3.5} fill="none" strokeLinecap="round" />
-      <path d={d} stroke={ROPE} strokeWidth={w} fill="none" strokeLinecap="round" />
-      <path d={d} stroke={ROPE_LT} strokeWidth={w - 1} strokeDasharray="2.6 5.6" fill="none" strokeLinecap="butt" opacity="0.85" />
+      <path d={d} stroke={ROPE_OUTLINE} strokeWidth={w + 2.4} fill="none" strokeLinecap="round" />
+      <path d={d} stroke={ROPE_BASE} strokeWidth={w} fill="none" strokeLinecap="round" />
+      <path d={d} stroke={ROPE_GROOVE} strokeWidth={w} strokeDasharray={dash} fill="none" strokeLinecap="butt" />
+      <path d={d} stroke={ROPE_HI} strokeWidth={w * 0.44} strokeDasharray={dash} strokeDashoffset={off} fill="none" strokeLinecap="butt" opacity="0.9" />
     </>
   )
 }
@@ -147,8 +154,8 @@ function Straight({ width = 220, w = 5 }) {
     <svg viewBox={`0 0 ${width} ${h}`} width={width} height={h} role="img" aria-label="Corda simples" style={{ maxWidth: '100%', height: 'auto' }}>
       <g transform={`translate(0 ${mid})`}>
         <Strand w={w} d={`M8 0 H ${width - 8}`} />
-        <circle cx="8" cy="0" r="2.4" fill={ROPE} />
-        <circle cx={width - 8} cy="0" r="2.4" fill={ROPE} />
+        <circle cx="8" cy="0" r="2.4" fill={ROPE_GROOVE} />
+        <circle cx={width - 8} cy="0" r="2.4" fill={ROPE_GROOVE} />
       </g>
     </svg>
   )
@@ -164,8 +171,8 @@ function Wavy({ width = 220, w = 5 }) {
   return (
     <svg viewBox={`0 0 ${width} ${h}`} width={width} height={h} role="img" aria-label="Corda ondulada" style={{ maxWidth: '100%', height: 'auto' }}>
       <Strand w={w} d={d} />
-      <circle cx="8" cy={mid} r="2.4" fill={ROPE} />
-      <circle cx={width - 8} cy={mid} r="2.4" fill={ROPE} />
+      <circle cx="8" cy={mid} r="2.4" fill={ROPE_GROOVE} />
+      <circle cx={width - 8} cy={mid} r="2.4" fill={ROPE_GROOVE} />
     </svg>
   )
 }
@@ -178,8 +185,8 @@ function Vertical({ height = 160, w = 5 }) {
     <svg viewBox={`0 0 ${wpx} ${height}`} width={wpx} height={height} role="img" aria-label="Corda vertical" style={{ height, width: 'auto' }}>
       <g transform={`translate(${mid} 0)`}>
         <Strand w={w} d={`M0 8 V ${height - 8}`} />
-        <circle cx="0" cy="8" r="2.4" fill={ROPE} />
-        <circle cx="0" cy={height - 8} r="2.4" fill={ROPE} />
+        <circle cx="0" cy="8" r="2.4" fill={ROPE_GROOVE} />
+        <circle cx="0" cy={height - 8} r="2.4" fill={ROPE_GROOVE} />
       </g>
     </svg>
   )
@@ -190,8 +197,8 @@ function Corner({ size = 90, w = 5 }) {
   return (
     <svg viewBox="0 0 90 90" width={size} height={size} role="img" aria-label="Corda de canto" style={{ maxWidth: '100%', height: 'auto' }}>
       <Strand w={w} d="M10 82 V 30 Q 10 10 30 10 H 82" />
-      <circle cx="10" cy="82" r="2.4" fill={ROPE} />
-      <circle cx="82" cy="10" r="2.4" fill={ROPE} />
+      <circle cx="10" cy="82" r="2.4" fill={ROPE_GROOVE} />
+      <circle cx="82" cy="10" r="2.4" fill={ROPE_GROOVE} />
     </svg>
   )
 }

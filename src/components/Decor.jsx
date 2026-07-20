@@ -1,16 +1,23 @@
 // Decorative nautical elements — rope dividers and the knot emblem.
 // Drawn as SVG so they stay crisp at any size and inherit the rope colour.
 
-const ROPE = '#a88560' // corda
-const ROPE_LT = '#c9ad88' // highlight / twist bands
-const CASE = '#f6f1e8' // light casing that creates the over/under gaps
+// Realistic twisted-rope palette (corda family, shaded for a 3-D look).
+const ROPE = '#ac8a62' // mid rope tone
+const ROPE_OUTLINE = '#6f5233' // dark casing / shadow
+const ROPE_GROOVE = '#7d5c37' // dark grooves between the twists
+const ROPE_HI = '#e0cba2' // highlight on each twist
 
-// A twisted-rope stroke, rendered as a line plus lighter "twist" bands.
-function Rope({ d }) {
+// A length of twisted rope: dark casing, base tone, dark grooves and light
+// highlights (dashed, half-phase apart) that read as the rope's twists.
+function Rope({ d, w = 4.6 }) {
+  const dash = `${(w * 0.5).toFixed(1)} ${(w * 0.72).toFixed(1)}`
+  const off = (w * 0.61).toFixed(1)
   return (
-    <g fill="none" strokeLinecap="round">
-      <path d={d} stroke={ROPE} strokeWidth="3.4" opacity="0.95" />
-      <path d={d} stroke={ROPE_LT} strokeWidth="2.6" strokeDasharray="1.8 4.6" strokeLinecap="butt" opacity="0.9" />
+    <g fill="none">
+      <path d={d} stroke={ROPE_OUTLINE} strokeWidth={w + 2} strokeLinecap="round" />
+      <path d={d} stroke={ROPE} strokeWidth={w} strokeLinecap="round" />
+      <path d={d} stroke={ROPE_GROOVE} strokeWidth={w} strokeDasharray={dash} strokeLinecap="butt" />
+      <path d={d} stroke={ROPE_HI} strokeWidth={w * 0.44} strokeDasharray={dash} strokeDashoffset={off} strokeLinecap="butt" opacity="0.9" />
     </g>
   )
 }
@@ -27,13 +34,16 @@ const BIGHT_B = 'M 46 0 C 32 -11, 8 -14, -5 -7 C -16 -1, -16 1, -5 7 C 8 14, 32 
 // (A over B up top, B over A at the bottom → proper interlock).
 const WEAVE_B = 'M -6 7 C 6 13, 22 12, 34 4'
 
-// One rope strand: light casing, solid rope, then lighter twist bands.
-function Strand({ d }) {
+// One rope strand of the knot: casing, base tone, grooves and highlights.
+function Strand({ d, w = 6 }) {
+  const dash = `${(w * 0.5).toFixed(1)} ${(w * 0.72).toFixed(1)}`
+  const off = (w * 0.61).toFixed(1)
   return (
     <>
-      <path d={d} stroke={CASE} strokeWidth="9.5" fill="none" strokeLinecap="round" />
-      <path d={d} stroke={ROPE} strokeWidth="6" fill="none" strokeLinecap="round" />
-      <path d={d} stroke={ROPE_LT} strokeWidth="5" strokeDasharray="2.6 5.6" fill="none" strokeLinecap="butt" opacity="0.85" />
+      <path d={d} stroke={ROPE_OUTLINE} strokeWidth={w + 2.4} fill="none" strokeLinecap="round" />
+      <path d={d} stroke={ROPE} strokeWidth={w} fill="none" strokeLinecap="round" />
+      <path d={d} stroke={ROPE_GROOVE} strokeWidth={w} strokeDasharray={dash} fill="none" strokeLinecap="butt" />
+      <path d={d} stroke={ROPE_HI} strokeWidth={w * 0.44} strokeDasharray={dash} strokeDashoffset={off} fill="none" strokeLinecap="butt" opacity="0.9" />
     </>
   )
 }
