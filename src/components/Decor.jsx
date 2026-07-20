@@ -1,34 +1,59 @@
 // Decorative nautical elements — rope dividers and the knot emblem.
 // Drawn as SVG so they stay crisp at any size and inherit the rope colour.
 
-const ROPE = '#a88560'
-const ROPE_LT = '#c4a884'
+const ROPE = '#a88560' // corda
+const ROPE_LT = '#c9ad88' // highlight / twist bands
+const CASE = '#f6f1e8' // light casing that creates the over/under gaps
 
-// A twisted-rope stroke, rendered as a dashed double-line to suggest the weave.
+// A twisted-rope stroke, rendered as a line plus lighter "twist" bands.
 function Rope({ d }) {
   return (
     <g fill="none" strokeLinecap="round">
-      <path d={d} stroke={ROPE} strokeWidth="3.4" opacity="0.9" />
-      <path d={d} stroke={ROPE_LT} strokeWidth="1.2" strokeDasharray="1.5 5" opacity="0.9" />
+      <path d={d} stroke={ROPE} strokeWidth="3.4" opacity="0.95" />
+      <path d={d} stroke={ROPE_LT} strokeWidth="2.6" strokeDasharray="1.8 4.6" strokeLinecap="butt" opacity="0.9" />
     </g>
   )
 }
 
-// Central reef/figure-eight knot used across the site.
+// ---- Reef (square) knot ----------------------------------------------------
+// Two interlocking bights, each anchored to the continuing side rope at ±HS.
+const HS = 46 // knot half-span in local units (before scaling)
+
+// Left bight: leaves the left rope, bulges right, returns — a loop pointing right.
+const BIGHT_A = 'M -46 0 C -32 -11, -8 -14, 5 -7 C 16 -1, 16 1, 5 7 C -8 14, -32 11, -46 0'
+// Right bight: mirror of A.
+const BIGHT_B = 'M 46 0 C 32 -11, 8 -14, -5 -7 C -16 -1, -16 1, -5 7 C 8 14, 32 11, 46 0'
+// Short lower-centre segment of B, redrawn on top so the weave alternates
+// (A over B up top, B over A at the bottom → proper interlock).
+const WEAVE_B = 'M -6 7 C 6 13, 22 12, 34 4'
+
+// One rope strand: light casing, solid rope, then lighter twist bands.
+function Strand({ d }) {
+  return (
+    <>
+      <path d={d} stroke={CASE} strokeWidth="9.5" fill="none" strokeLinecap="round" />
+      <path d={d} stroke={ROPE} strokeWidth="6" fill="none" strokeLinecap="round" />
+      <path d={d} stroke={ROPE_LT} strokeWidth="5" strokeDasharray="2.6 5.6" fill="none" strokeLinecap="butt" opacity="0.85" />
+    </>
+  )
+}
+
 function Knot({ cx = 0, cy = 0, s = 1 }) {
   return (
-    <g transform={`translate(${cx} ${cy}) scale(${s})`} fill="none" stroke={ROPE} strokeWidth="3.1" strokeLinecap="round">
-      <path d="M-14 -4 C -22 4, -6 12, 0 4 C 6 -4, 22 4, 14 -4 C 8 -8, -8 -8, -14 -4 Z" />
-      <path d="M-14 4 C -22 -4, -6 -12, 0 -4 C 6 4, 22 -4, 14 4" opacity="0.55" />
+    <g transform={`translate(${cx} ${cy}) scale(${s})`}>
+      <Strand d={BIGHT_B} />
+      <Strand d={BIGHT_A} />
+      <Strand d={WEAVE_B} />
     </g>
   )
 }
 
-// Full-width divider: two ropes meeting at a centre knot.
+// Full-width divider: rope on each side meeting a reef knot in the centre.
 export function RopeDivider({ width = 340, className }) {
-  const h = 40
+  const h = 44
   const mid = h / 2
-  const knotHalf = 26
+  const s = 0.7
+  const knotHalf = HS * s // where the side ropes meet the knot's tails
   return (
     <svg
       className={className}
@@ -38,12 +63,12 @@ export function RopeDivider({ width = 340, className }) {
       role="presentation"
       style={{ maxWidth: '100%', height: 'auto' }}
     >
-      <Rope d={`M8 ${mid} H ${width / 2 - knotHalf}`} />
-      <Rope d={`M ${width / 2 + knotHalf} ${mid} H ${width - 8}`} />
+      <Rope d={`M8 ${mid} H ${width / 2 - knotHalf + 2}`} />
+      <Rope d={`M ${width / 2 + knotHalf - 2} ${mid} H ${width - 8}`} />
       {/* end whip-caps */}
       <circle cx="8" cy={mid} r="2.6" fill={ROPE} />
       <circle cx={width - 8} cy={mid} r="2.6" fill={ROPE} />
-      <Knot cx={width / 2} cy={mid} s={0.95} />
+      <Knot cx={width / 2} cy={mid} s={s} />
     </svg>
   )
 }
@@ -65,10 +90,10 @@ export function HeartDot({ className }) {
 }
 
 // Standalone knot emblem for the footer / seals.
-export function KnotEmblem({ size = 70, className }) {
+export function KnotEmblem({ size = 90, className }) {
   return (
-    <svg className={className} viewBox="-40 -24 80 48" width={size} height={size * 0.6} role="presentation">
-      <Knot s={1.3} />
+    <svg className={className} viewBox="-56 -30 112 60" width={size} height={size * 0.54} role="presentation">
+      <Knot s={1.05} />
     </svg>
   )
 }
