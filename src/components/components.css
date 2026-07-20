@@ -160,54 +160,42 @@
   position: relative;
   min-height: 100svh;
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   justify-content: center;
   text-align: center;
   overflow: hidden;
 }
-.hero__sky {
+/* Soft sea gradient shown until the photo loads / if it is missing */
+.hero__fallback {
   position: absolute;
   inset: 0;
-  background: linear-gradient(180deg, #eef3f4 0%, #e6eef1 40%, #dbe7ec 100%);
+  background: linear-gradient(180deg, #eef3f4 0%, #cfe0e8 55%, #9cbcca 100%);
 }
-.hero__sea {
+.hero__bg {
   position: absolute;
-  inset: 58% 0 0 0;
-  background: linear-gradient(180deg, #cfe0e8 0%, #b4cdd9 45%, #9cbcca 100%);
+  inset: 0;
+  background-size: cover;
+  background-position: center 42%;
+  background-repeat: no-repeat;
 }
-.hero__sea::before,
-.hero__sea::after {
-  content: '';
+/* Lighten the top (behind the nav + names) and add a gentle base tint,
+   leaving the middle clear so the boat stays crisp. */
+.hero__scrim {
   position: absolute;
-  left: -10%;
-  right: -10%;
-  height: 10px;
-  border-radius: 50%;
-  background: rgba(255, 255, 255, 0.35);
-}
-.hero__sea::before {
-  top: 22%;
-}
-.hero__sea::after {
-  top: 46%;
-  opacity: 0.6;
-}
-.hero__boat {
-  position: absolute;
-  bottom: 30%;
-  right: 12%;
-  width: clamp(120px, 20vw, 230px);
-  filter: drop-shadow(0 10px 18px rgba(93, 118, 138, 0.25));
-  animation: bob 6s ease-in-out infinite;
-}
-@keyframes bob {
-  0%, 100% { transform: translateY(0) rotate(-1deg); }
-  50% { transform: translateY(-10px) rotate(1deg); }
+  inset: 0;
+  background: linear-gradient(
+    180deg,
+    rgba(248, 245, 239, 0.78) 0%,
+    rgba(248, 245, 239, 0.34) 22%,
+    rgba(248, 245, 239, 0) 44%,
+    rgba(248, 245, 239, 0) 78%,
+    rgba(248, 245, 239, 0.28) 100%
+  );
 }
 .hero__content {
   position: relative;
   z-index: 2;
-  padding-top: var(--nav-h);
+  padding-top: calc(var(--nav-h) + clamp(1.5rem, 5vh, 3.5rem));
 }
 .hero__rope {
   margin: 0 auto 1.6rem;
