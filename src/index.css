@@ -1,0 +1,200 @@
+/* ============================================================
+   Maria & Gonçalo — Design System
+   Nautical watercolour · Tavira · 22.05.2027
+   ============================================================ */
+
+:root {
+  /* — Palette (from the Figma reference) — */
+  --marfim: #f8f5ef; /* ivory background */
+  --areia: #e8dccb; /* sand */
+  --linho: #d9cec0; /* linen */
+  --corda: #a88560; /* rope / primary accent */
+  --corda-escuro: #8f6f4c;
+  --azul: #89a3b8; /* sea blue */
+  --azul-escuro: #5d768a;
+  --cinza: #6e6e6e;
+  --cinza-claro: #9a9a94;
+  --branco: #ffffff;
+
+  --texto: #4a463f; /* warm charcoal for body text */
+  --texto-suave: #6e6a62;
+
+  /* — Typography — */
+  --f-display: 'Playfair Display', Georgia, serif;
+  --f-serif: 'Cormorant Garamond', Georgia, serif;
+  --f-body: 'Inter', system-ui, sans-serif;
+  --f-script: 'Allura', cursive;
+
+  /* — Layout — */
+  --maxw: 1180px;
+  --nav-h: 74px;
+  --radius: 10px;
+  --shadow-sm: 0 4px 18px rgba(93, 118, 138, 0.08);
+  --shadow-md: 0 12px 40px rgba(93, 118, 138, 0.12);
+  --ease: cubic-bezier(0.22, 0.61, 0.36, 1);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: var(--nav-h);
+}
+
+body {
+  margin: 0;
+  font-family: var(--f-body);
+  color: var(--texto);
+  background: var(--marfim);
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  margin: 0;
+  font-weight: 500;
+  color: #3f3b34;
+}
+
+p {
+  margin: 0;
+}
+
+/* — Typographic scale — */
+.h1 {
+  font-family: var(--f-script);
+  font-size: clamp(3.2rem, 9vw, 6rem);
+  font-weight: 400;
+  line-height: 1.05;
+  color: var(--corda-escuro);
+}
+.h2 {
+  font-family: var(--f-display);
+  font-size: clamp(1.9rem, 4vw, 2.9rem);
+  font-weight: 500;
+  letter-spacing: 0.01em;
+}
+.h3 {
+  font-family: var(--f-serif);
+  font-size: clamp(1.4rem, 2.6vw, 1.9rem);
+  font-weight: 600;
+}
+.eyebrow {
+  font-family: var(--f-body);
+  font-size: 0.72rem;
+  letter-spacing: 0.34em;
+  text-transform: uppercase;
+  color: var(--corda);
+  font-weight: 500;
+}
+.script {
+  font-family: var(--f-script);
+  color: var(--corda-escuro);
+}
+
+/* — Layout helpers — */
+.container {
+  width: 100%;
+  max-width: var(--maxw);
+  margin-inline: auto;
+  padding-inline: clamp(1.2rem, 5vw, 3rem);
+}
+
+.section {
+  padding-block: clamp(4rem, 9vw, 7.5rem);
+  scroll-margin-top: var(--nav-h);
+}
+
+.section--alt {
+  background: linear-gradient(180deg, #f3ede2 0%, #efe7d9 100%);
+}
+
+.section-head {
+  text-align: center;
+  margin-bottom: clamp(2.5rem, 5vw, 4rem);
+}
+.section-head .eyebrow {
+  display: block;
+  margin-bottom: 0.9rem;
+}
+.section-head .lead {
+  max-width: 44ch;
+  margin: 1.1rem auto 0;
+  color: var(--texto-suave);
+}
+
+/* — Buttons — */
+.btn {
+  --bg: var(--corda);
+  --fg: #fff;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-family: var(--f-body);
+  font-size: 0.74rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  font-weight: 500;
+  padding: 0.95rem 2.1rem;
+  border: 1px solid var(--bg);
+  border-radius: 40px;
+  background: var(--bg);
+  color: var(--fg);
+  cursor: pointer;
+  transition: all 0.3s var(--ease);
+}
+.btn:hover {
+  background: var(--corda-escuro);
+  border-color: var(--corda-escuro);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
+.btn--ghost {
+  --bg: transparent;
+  --fg: var(--corda-escuro);
+  border-color: var(--linho);
+}
+.btn--ghost:hover {
+  --bg: rgba(168, 133, 96, 0.08);
+  border-color: var(--corda);
+  color: var(--corda-escuro);
+  box-shadow: none;
+}
+
+/* — Reveal-on-scroll — */
+.reveal {
+  opacity: 0;
+  transform: translateY(26px);
+  transition: opacity 0.9s var(--ease), transform 0.9s var(--ease);
+}
+.reveal.is-visible {
+  opacity: 1;
+  transform: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  .reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}
