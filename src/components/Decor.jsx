@@ -1,69 +1,17 @@
-// Decorative nautical elements — rope dividers and the knot emblem.
-// Drawn as SVG so they stay crisp at any size and inherit the rope colour.
+// Decorative elements — a minimal line divider and small heart accents.
+// (Replaced the rope/knot motifs with a lighter, more refined look.)
 
-// Realistic twisted-rope palette (corda family, shaded for a 3-D look).
-const ROPE = '#ac8a62' // mid rope tone
-const ROPE_OUTLINE = '#6f5233' // dark casing / shadow
-const ROPE_GROOVE = '#7d5c37' // dark grooves between the twists
-const ROPE_HI = '#e0cba2' // highlight on each twist
+const LINE = '#cbb590' // soft corda line
+const ACCENT = '#a88560' // corda heart
 
-// A length of twisted rope: dark casing, base tone, dark grooves and light
-// highlights (dashed, half-phase apart) that read as the rope's twists.
-function Rope({ d, w = 4.6 }) {
-  const dash = `${(w * 0.5).toFixed(1)} ${(w * 0.72).toFixed(1)}`
-  const off = (w * 0.61).toFixed(1)
-  return (
-    <g fill="none">
-      <path d={d} stroke={ROPE_OUTLINE} strokeWidth={w + 2} strokeLinecap="round" />
-      <path d={d} stroke={ROPE} strokeWidth={w} strokeLinecap="round" />
-      <path d={d} stroke={ROPE_GROOVE} strokeWidth={w} strokeDasharray={dash} strokeLinecap="butt" />
-      <path d={d} stroke={ROPE_HI} strokeWidth={w * 0.44} strokeDasharray={dash} strokeDashoffset={off} strokeLinecap="butt" opacity="0.9" />
-    </g>
-  )
-}
+const HEART = 'M12 20s-7-4.4-7-9.6A3.9 3.9 0 0 1 12 7a3.9 3.9 0 0 1 7 3.4C19 15.6 12 20 12 20z'
 
-// ---- Reef (square) knot ----------------------------------------------------
-// Two interlocking bights, each anchored to the continuing side rope at ±HS.
-const HS = 46 // knot half-span in local units (before scaling)
-
-// Left bight: leaves the left rope, bulges right, returns — a loop pointing right.
-const BIGHT_A = 'M -46 0 C -32 -11, -8 -14, 5 -7 C 16 -1, 16 1, 5 7 C -8 14, -32 11, -46 0'
-// Right bight: mirror of A.
-const BIGHT_B = 'M 46 0 C 32 -11, 8 -14, -5 -7 C -16 -1, -16 1, -5 7 C 8 14, 32 11, 46 0'
-// Short lower-centre segment of B, redrawn on top so the weave alternates
-// (A over B up top, B over A at the bottom → proper interlock).
-const WEAVE_B = 'M -6 7 C 6 13, 22 12, 34 4'
-
-// One rope strand of the knot: casing, base tone, grooves and highlights.
-function Strand({ d, w = 6 }) {
-  const dash = `${(w * 0.5).toFixed(1)} ${(w * 0.72).toFixed(1)}`
-  const off = (w * 0.61).toFixed(1)
-  return (
-    <>
-      <path d={d} stroke={ROPE_OUTLINE} strokeWidth={w + 2.4} fill="none" strokeLinecap="round" />
-      <path d={d} stroke={ROPE} strokeWidth={w} fill="none" strokeLinecap="round" />
-      <path d={d} stroke={ROPE_GROOVE} strokeWidth={w} strokeDasharray={dash} fill="none" strokeLinecap="butt" />
-      <path d={d} stroke={ROPE_HI} strokeWidth={w * 0.44} strokeDasharray={dash} strokeDashoffset={off} fill="none" strokeLinecap="butt" opacity="0.9" />
-    </>
-  )
-}
-
-function Knot({ cx = 0, cy = 0, s = 1 }) {
-  return (
-    <g transform={`translate(${cx} ${cy}) scale(${s})`}>
-      <Strand d={BIGHT_B} />
-      <Strand d={BIGHT_A} />
-      <Strand d={WEAVE_B} />
-    </g>
-  )
-}
-
-// Full-width divider: rope on each side meeting a reef knot in the centre.
+// Full-width divider: a thin line broken by a small heart in the centre.
 export function RopeDivider({ width = 340, className }) {
-  const h = 44
+  const h = 22
   const mid = h / 2
-  const s = 0.7
-  const knotHalf = HS * s // where the side ropes meet the knot's tails
+  const c = width / 2
+  const gap = 14
   return (
     <svg
       className={className}
@@ -73,12 +21,11 @@ export function RopeDivider({ width = 340, className }) {
       role="presentation"
       style={{ maxWidth: '100%', height: 'auto' }}
     >
-      <Rope d={`M8 ${mid} H ${width / 2 - knotHalf + 2}`} />
-      <Rope d={`M ${width / 2 + knotHalf - 2} ${mid} H ${width - 8}`} />
-      {/* end whip-caps */}
-      <circle cx="8" cy={mid} r="2.6" fill={ROPE} />
-      <circle cx={width - 8} cy={mid} r="2.6" fill={ROPE} />
-      <Knot cx={width / 2} cy={mid} s={s} />
+      <line x1="10" y1={mid} x2={c - gap} y2={mid} stroke={LINE} strokeWidth="1.2" strokeLinecap="round" />
+      <line x1={c + gap} y1={mid} x2={width - 10} y2={mid} stroke={LINE} strokeWidth="1.2" strokeLinecap="round" />
+      <g transform={`translate(${c - 7.2} ${mid - 8.1}) scale(0.6)`}>
+        <path d={HEART} fill="none" stroke={ACCENT} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+      </g>
     </svg>
   )
 }
@@ -87,23 +34,16 @@ export function RopeDivider({ width = 340, className }) {
 export function HeartDot({ className }) {
   return (
     <svg className={className} viewBox="0 0 24 24" width="20" height="20" role="presentation">
-      <path
-        d="M12 20s-7-4.4-7-9.6A3.9 3.9 0 0 1 12 7a3.9 3.9 0 0 1 7 3.4C19 15.6 12 20 12 20z"
-        fill="none"
-        stroke={ROPE}
-        strokeWidth="1.4"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
+      <path d={HEART} fill="none" stroke={ACCENT} strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round" />
     </svg>
   )
 }
 
-// Standalone knot emblem for the footer / seals.
-export function KnotEmblem({ size = 90, className }) {
+// Footer accent — a simple outlined heart (was the knot emblem).
+export function KnotEmblem({ size = 40, className }) {
   return (
-    <svg className={className} viewBox="-56 -30 112 60" width={size} height={size * 0.54} role="presentation">
-      <Knot s={1.05} />
+    <svg className={className} viewBox="0 0 24 24" width={size} height={size} role="presentation">
+      <path d={HEART} fill="none" stroke={ACCENT} strokeWidth="1.1" strokeLinecap="round" strokeLinejoin="round" />
     </svg>
   )
 }
