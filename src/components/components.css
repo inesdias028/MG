@@ -456,9 +456,8 @@
   margin-top: 0.2rem;
   max-width: 12ch;
 }
-.anchor-target {
-  display: block;
-  height: 0;
+.venue {
+  scroll-margin-top: calc(var(--nav-h) + 1rem);
 }
 
 /* ---------- Dress code ---------- */

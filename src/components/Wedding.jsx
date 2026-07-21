@@ -36,8 +36,7 @@ export default function Wedding() {
 
         <div className="venues">
           <VenueCard id="cerimonia-card" data={ceremony} imgSrc="cerimonia-igreja.jpg" />
-          <span id="celebracao" className="anchor-target" aria-hidden="true" />
-          <VenueCard id="celebracao-card" data={celebration} imgSrc="celebracao-quinta.jpg" />
+          <VenueCard id="celebracao" data={celebration} imgSrc="celebracao-quinta.jpg" />
         </div>
 
         {/* Programa do dia */}
