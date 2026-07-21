@@ -7,14 +7,7 @@ const heroImg = `${import.meta.env.BASE_URL}hero-couple.jpg`
 export default function Hero() {
   return (
     <section id="inicio" className="hero">
-      {/* Soft sea fallback shows if the image hasn't been added yet */}
-      <div className="hero__fallback" aria-hidden="true" />
-      <div
-        className="hero__bg"
-        style={{ backgroundImage: `url("${heroImg}")` }}
-        role="img"
-        aria-label={`${couple.bride} e ${couple.groom} num barco`}
-      />
+      <img className="hero__img" src={heroImg} alt={`${couple.bride} e ${couple.groom} num barco`} />
       <div className="hero__scrim" aria-hidden="true" />
 
       <div className="hero__content container">
