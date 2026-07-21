@@ -1,15 +1,12 @@
 import { dressCode } from '../data/content.js'
-import Placeholder from './Placeholder.jsx'
 import { HeartDot } from './Decor.jsx'
+
+const dressImg = `${import.meta.env.BASE_URL}dresscode.jpg`
 
 export default function DressCode() {
   return (
     <section id="dress-code" className="section">
       <div className="container dress">
-        <div className="dress__art reveal">
-          <Placeholder icon="leaf" label="Vestido" variant="sand" ratio="3 / 4" className="dress__ph dress__ph--a" />
-          <Placeholder icon="anchor" label="Fato" variant="sea" ratio="3 / 4" className="dress__ph dress__ph--b" />
-        </div>
         <div className="dress__body reveal">
           <span className="eyebrow">Dress Code</span>
           <h2 className="h2 script">{dressCode.title}</h2>
@@ -21,6 +18,7 @@ export default function DressCode() {
           </ul>
           <HeartDot className="dress__heart" />
         </div>
+        <img className="dress__photo reveal" src={dressImg} alt="Sugestões de traje — fato e vestidos" loading="lazy" />
       </div>
     </section>
   )
