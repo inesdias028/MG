@@ -17,7 +17,11 @@ export default function WhereToStay() {
         <div className="hotels">
           {hotels.map((h, i) => (
             <article className="hotel reveal" key={h.name} style={{ transitionDelay: `${i * 80}ms` }}>
-              <Placeholder icon="bed" label={h.name} variant={i % 2 ? 'sea' : 'sand'} ratio="4 / 3" className="hotel__img" />
+              {h.img ? (
+                <img className="hotel__photo" src={`${import.meta.env.BASE_URL}${h.img}`} alt={h.name} loading="lazy" />
+              ) : (
+                <Placeholder icon="bed" label={h.name} variant={i % 2 ? 'sea' : 'sand'} ratio="4 / 3" className="hotel__img" />
+              )}
               <div className="hotel__body">
                 <h3 className="hotel__name">{h.name}</h3>
                 <span className="hotel__stars" aria-label={`${h.stars} estrelas`}>
