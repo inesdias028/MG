@@ -10,12 +10,12 @@
 //   field's `entry.XXXXX` id. Get them from the form's "Get pre-filled link".
 //   When `action` is set, this is used and responses go straight to the Sheet.
 export const googleForm = {
-  action: '', // e.g. 'https://docs.google.com/forms/d/e/1FAIpQL.../formResponse'
+  action: 'https://docs.google.com/forms/d/e/1FAIpQLScCtlO9xjj4syshWYnl6maI7mDk4TgCqz2rWfs7RGoEz6N1dQ/formResponse',
   fields: {
-    name: '', // e.g. 'entry.1111111111'
-    guests: '', // e.g. 'entry.2222222222'
-    diet: '', // e.g. 'entry.3333333333'
-    message: '', // e.g. 'entry.4444444444'
+    name: 'entry.1253602870',
+    guests: 'entry.1269065760',
+    diet: 'entry.1828144813',
+    message: 'entry.20879956',
   },
 }
 //
