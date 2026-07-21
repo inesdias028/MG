@@ -102,7 +102,7 @@ export const directions = [
 
 export const hotels = [
   { name: 'Hotel Rural Quinta do Marco', stars: 4, dist: '8 km da quinta', drive: '12 min de carro', url: '#', img: 'hotel-marco.jpg' },
-  { name: 'Hotel Maria Nova Lounge Hotel', stars: 4, dist: '5 km da quinta', drive: '8 min de carro', url: '#' },
+  { name: 'AP Maria Nova Lounge Hotel', stars: 4, dist: '5 km da quinta', drive: '8 min de carro', url: '#', img: 'hotel-maria-nova.jpg' },
   { name: 'Pousada de Tavira', stars: 4, dist: '6 km da quinta', drive: '10 min de carro', url: '#' },
   { name: 'Alojamentos locais Tavira', stars: 5, dist: 'Várias opções na zona', drive: '', url: '#' },
 ]
