@@ -1,5 +1,4 @@
 import { dressCode } from '../data/content.js'
-import { HeartDot } from './Decor.jsx'
 
 const dressImg = `${import.meta.env.BASE_URL}dresscode.jpg`
 
@@ -16,7 +15,6 @@ export default function DressCode() {
               <li key={n}>{n}</li>
             ))}
           </ul>
-          <HeartDot className="dress__heart" />
         </div>
         <img className="dress__photo reveal" src={dressImg} alt="Sugestões de traje — fato e vestidos" loading="lazy" />
       </div>
