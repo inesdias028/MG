@@ -6,11 +6,6 @@ import { RopeDivider } from './Decor.jsx'
 const heroImg = `${import.meta.env.BASE_URL}hero-couple.jpg`
 
 export default function Hero() {
-  const scrollDown = (e) => {
-    e.preventDefault()
-    document.getElementById('historia')?.scrollIntoView({ behavior: 'smooth' })
-  }
-
   return (
     <section id="inicio" className="hero">
       {/* Soft sea fallback shows if the image hasn't been added yet */}
@@ -31,9 +26,6 @@ export default function Hero() {
         </h1>
         <p className="hero__date">{couple.date}</p>
         <p className="hero__place">{couple.place}</p>
-        <a href="#historia" className="btn hero__cta" onClick={scrollDown}>
-          Descobrir o nosso dia
-        </a>
       </div>
     </section>
   )
