@@ -363,6 +363,12 @@
   transform: translateY(-5px);
   box-shadow: var(--shadow-md);
 }
+.venue__photo {
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  object-fit: cover;
+  display: block;
+}
 .venue__body {
   padding: 1.6rem 1.8rem 2rem;
   text-align: center;

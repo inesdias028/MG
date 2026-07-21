@@ -3,10 +3,14 @@ import { iconMap, Pin, External } from './Icons.jsx'
 import Placeholder from './Placeholder.jsx'
 import { RopeDivider } from './Decor.jsx'
 
-function VenueCard({ id, data, icon, img }) {
+function VenueCard({ id, data, img, imgSrc }) {
   return (
     <article id={id} className="venue reveal">
-      <Placeholder icon={img} label={data.place} variant="sand" ratio="16 / 10" className="venue__img" />
+      {imgSrc ? (
+        <img className="venue__photo" src={`${import.meta.env.BASE_URL}${imgSrc}`} alt={data.place} loading="lazy" />
+      ) : (
+        <Placeholder icon={img} label={data.place} variant="sand" ratio="16 / 10" className="venue__img" />
+      )}
       <div className="venue__body">
         <span className="venue__kicker eyebrow">{data.title}</span>
         <span className="venue__time">{data.time}</span>
@@ -31,7 +35,7 @@ export default function Wedding() {
         </div>
 
         <div className="venues">
-          <VenueCard id="cerimonia-card" data={ceremony} img="church" />
+          <VenueCard id="cerimonia-card" data={ceremony} imgSrc="cerimonia-igreja.jpg" />
           <span id="celebracao" className="anchor-target" aria-hidden="true" />
           <VenueCard id="celebracao-card" data={celebration} img="sailboat" />
         </div>
