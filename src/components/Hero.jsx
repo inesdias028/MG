@@ -1,5 +1,4 @@
 import { couple } from '../data/content.js'
-import { RopeDivider } from './Decor.jsx'
 
 // Hero background image lives in public/ — drop the watercolour there as
 // `hero-couple.png`. BASE_URL keeps the path correct on dev and on GitHub Pages.
@@ -19,7 +18,6 @@ export default function Hero() {
       <div className="hero__scrim" aria-hidden="true" />
 
       <div className="hero__content container">
-        <RopeDivider width={300} className="hero__rope" />
         <p className="hero__pre eyebrow">Vamos casar</p>
         <h1 className="h1 hero__names">
           {couple.bride} <span className="hero__amp">&amp;</span> {couple.groom}
