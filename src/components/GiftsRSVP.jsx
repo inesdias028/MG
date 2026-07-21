@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { gifts, rsvpEndpoint } from '../data/content.js'
+import { gifts, rsvpEndpoint, googleForm } from '../data/content.js'
 import { Gift, Heart } from './Icons.jsx'
 import { RopeDivider } from './Decor.jsx'
 
@@ -20,28 +20,42 @@ export default function GiftsRSVP() {
     }
     setError('')
 
-    // No endpoint configured yet → just confirm locally (see content.js).
-    if (!rsvpEndpoint) {
+    const useGoogle = googleForm.action && googleForm.fields.name
+
+    // Nothing configured yet → just confirm locally (see content.js).
+    if (!useGoogle && !rsvpEndpoint) {
       setSent(true)
       return
     }
 
-    // Deliver the RSVP by e-mail via the configured form service (Formspree…).
     setSending(true)
     try {
-      const res = await fetch(rsvpEndpoint, {
-        method: 'POST',
-        headers: { Accept: 'application/json', 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          Nome: form.name,
-          'Nº de convidados': form.guests,
-          'Restrições alimentares': form.diet,
-          Mensagem: form.message,
-          _subject: `RSVP · ${form.name}`,
-        }),
-      })
-      if (!res.ok) throw new Error('bad status')
-      setSent(true)
+      if (useGoogle) {
+        // Post to the Google Form; responses land in its linked Sheet.
+        // no-cors → the response is opaque, so a resolved fetch means "sent".
+        const body = new URLSearchParams()
+        body.append(googleForm.fields.name, form.name)
+        if (googleForm.fields.guests) body.append(googleForm.fields.guests, form.guests)
+        if (googleForm.fields.diet) body.append(googleForm.fields.diet, form.diet)
+        if (googleForm.fields.message) body.append(googleForm.fields.message, form.message)
+        await fetch(googleForm.action, { method: 'POST', mode: 'no-cors', body })
+        setSent(true)
+      } else {
+        // Deliver by e-mail via Formspree / Getform.
+        const res = await fetch(rsvpEndpoint, {
+          method: 'POST',
+          headers: { Accept: 'application/json', 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            Nome: form.name,
+            'Nº de convidados': form.guests,
+            'Restrições alimentares': form.diet,
+            Mensagem: form.message,
+            _subject: `RSVP · ${form.name}`,
+          }),
+        })
+        if (!res.ok) throw new Error('bad status')
+        setSent(true)
+      }
     } catch {
       setError('Não foi possível enviar. Tente novamente ou contacte-nos diretamente.')
     } finally {

@@ -4,11 +4,26 @@
 // ============================================================
 
 // RSVP form delivery.
-// Leave empty ('') to just show the local "thank you" confirmation.
-// To actually RECEIVE responses, create a free form at https://formspree.io
-// (or https://getform.io) and paste its endpoint URL here, e.g.:
+//
+// Option A — Google Forms (responses land in a Google Sheet).
+//   Fill in `action` (the form's POST URL ending in /formResponse) and each
+//   field's `entry.XXXXX` id. Get them from the form's "Get pre-filled link".
+//   When `action` is set, this is used and responses go straight to the Sheet.
+export const googleForm = {
+  action: '', // e.g. 'https://docs.google.com/forms/d/e/1FAIpQL.../formResponse'
+  fields: {
+    name: '', // e.g. 'entry.1111111111'
+    guests: '', // e.g. 'entry.2222222222'
+    diet: '', // e.g. 'entry.3333333333'
+    message: '', // e.g. 'entry.4444444444'
+  },
+}
+//
+// Option B — Formspree / Getform (responses arrive by e-mail).
+//   Leave `googleForm.action` empty and paste an endpoint here instead, e.g.:
 //   rsvpEndpoint: 'https://formspree.io/f/abcdwxyz'
-// Submissions then arrive by email — no server needed.
+//
+// If both are empty the form just shows the local "thank you" confirmation.
 export const rsvpEndpoint = ''
 
 export const couple = {
