@@ -4,7 +4,7 @@ import { RopeDivider } from './Decor.jsx'
 
 export default function Story() {
   return (
-    <section id="historia" className="section">
+    <section id="historia" className="section section--flush-top">
       <div className="container">
         <div className="section-head reveal">
           <span className="eyebrow">O início de tudo</span>

@@ -125,6 +125,11 @@ p {
   background: linear-gradient(180deg, #f3ede2 0%, #efe7d9 100%);
 }
 
+/* Pull a section close to the one above (e.g. História right after the hero). */
+.section--flush-top {
+  padding-top: clamp(1.5rem, 3vw, 2.5rem);
+}
+
 .section-head {
   text-align: center;
   margin-bottom: clamp(2.5rem, 5vw, 4rem);
