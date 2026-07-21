@@ -156,18 +156,31 @@
 }
 
 /* ---------- Hero ---------- */
+/* Background sampled from the watercolour's own edge tones, so the space
+   beside the (capped-width) image on desktop continues its colours. */
 .hero {
   position: relative;
   overflow: hidden;
   text-align: center;
-  background: #f4eae0;
+  background: linear-gradient(
+    180deg,
+    #f3e9e0 0%,
+    #f4eae0 15%,
+    #e7dbcf 28%,
+    #f1e8df 45%,
+    #f2e8df 62%,
+    #f1e4db 80%,
+    #f2e4db 100%
+  );
 }
-/* Full-width watercolour, shown whole (never cropped) — the image's own
-   height sets the hero height. */
+/* Whole watercolour, never cropped. Capped width on desktop and centred;
+   full width on phones (where 100% < the cap). */
 .hero__img {
   display: block;
   width: 100%;
+  max-width: 800px;
   height: auto;
+  margin-inline: auto;
   filter: saturate(1.4) contrast(1.05) brightness(1.02);
 }
 /* Soft ivory halo behind the centred text for readability over the image. */
