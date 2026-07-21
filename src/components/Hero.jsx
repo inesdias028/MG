@@ -35,10 +35,6 @@ export default function Hero() {
           Descobrir o nosso dia
         </a>
       </div>
-
-      <a href="#historia" className="hero__scroll" onClick={scrollDown} aria-label="Descer">
-        <span />
-      </a>
     </section>
   )
 }
