@@ -185,9 +185,10 @@
 .hero__bg {
   position: absolute;
   inset: 0;
-  background-size: contain;
+  background-size: min(66%, 600px);
   background-position: center;
   background-repeat: no-repeat;
+  filter: saturate(1.4) contrast(1.05) brightness(1.02);
 }
 /* On phones the wide watercolour would letterbox with big empty bands, so
    fill the hero (cover) and centre the text over the image. */
@@ -196,7 +197,7 @@
     align-items: center;
   }
   .hero__bg {
-    background-size: cover;
+    background-size: contain;
     background-position: center;
   }
   .hero__content {
