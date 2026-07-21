@@ -189,6 +189,29 @@
   background-position: center;
   background-repeat: no-repeat;
 }
+/* On phones the wide watercolour would letterbox with big empty bands, so
+   fill the hero (cover) and centre the text over the image. */
+@media (max-width: 768px) {
+  .hero {
+    align-items: center;
+  }
+  .hero__bg {
+    background-size: cover;
+    background-position: center;
+  }
+  .hero__content {
+    padding-top: var(--nav-h);
+    padding-bottom: 1.5rem;
+  }
+  .hero__scrim {
+    background: linear-gradient(
+      180deg,
+      rgba(248, 245, 239, 0.5) 0%,
+      rgba(248, 245, 239, 0.22) 45%,
+      rgba(248, 245, 239, 0.45) 100%
+    );
+  }
+}
 /* A soft ivory halo behind the text (top-centre) makes the names stand out,
    plus a light top band for the nav — while the middle stays clear so the
    boat reads crisply. */
