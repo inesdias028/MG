@@ -1,16 +1,28 @@
 import { story } from '../data/content.js'
 import { iconMap } from './Icons.jsx'
 
-// Gentle sea-wave line that connects the timeline nodes.
+// Sea-wave lines connecting the timeline nodes: horizontal on desktop,
+// vertical (running down through the points) on mobile.
 function StoryWave() {
-  const seg = 64
-  const n = 18
-  let d = `M0 16 q ${seg / 2} -11 ${seg} 0`
-  for (let i = 1; i < n; i++) d += ` t ${seg} 0`
+  const hSeg = 64
+  const hN = 18
+  let hd = `M0 16 q ${hSeg / 2} -11 ${hSeg} 0`
+  for (let i = 1; i < hN; i++) hd += ` t ${hSeg} 0`
+
+  const vSeg = 72
+  const vN = 12
+  let vd = `M16 0 q -10 ${vSeg / 2} 0 ${vSeg}`
+  for (let i = 1; i < vN; i++) vd += ` t 0 ${vSeg}`
+
   return (
-    <svg className="story__wave" viewBox={`0 0 ${seg * n} 32`} preserveAspectRatio="none" aria-hidden="true">
-      <path d={d} fill="none" stroke="#9bb6c6" strokeWidth="2" strokeLinecap="round" />
-    </svg>
+    <>
+      <svg className="story__wave story__wave--h" viewBox={`0 0 ${hSeg * hN} 32`} preserveAspectRatio="none" aria-hidden="true">
+        <path d={hd} fill="none" stroke="#9bb6c6" strokeWidth="2" strokeLinecap="round" />
+      </svg>
+      <svg className="story__wave story__wave--v" viewBox={`0 0 32 ${vSeg * vN}`} preserveAspectRatio="none" aria-hidden="true">
+        <path d={vd} fill="none" stroke="#9bb6c6" strokeWidth="2" strokeLinecap="round" />
+      </svg>
+    </>
   )
 }
 
