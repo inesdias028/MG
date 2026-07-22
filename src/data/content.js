@@ -53,7 +53,7 @@ export const nav = [
 export const story = [
   { year: '2013', icon: 'anchor', text: 'Conhecemo-nos no mundo da vela.' },
   { year: '2024', icon: 'compass', text: 'Depois de 11 anos, começámos finalmente a namorar.' },
-  { year: '22.05.2026', icon: 'ring', text: 'E foi neste dia que nos pedimos para sempre.' },
+  { year: '22.05.2026', icon: 'ring', text: 'E foi neste dia que o Gonçalo se chegou à frente.' },
   { year: '22.05.2027', icon: 'sailboat', text: 'O dia em que queremos que façam parte da nossa maior aventura.' },
 ]
 
