@@ -430,16 +430,6 @@
   gap: 0.5rem;
   position: relative;
 }
-.program__track::before {
-  content: '';
-  position: absolute;
-  top: 68px;
-  left: 7%;
-  right: 7%;
-  height: 2px;
-  background: var(--linho);
-  z-index: 0;
-}
 .program__step {
   position: relative;
   z-index: 1;
@@ -999,14 +989,6 @@
   .program__track {
     grid-template-columns: 1fr;
     gap: 0;
-  }
-  .program__track::before {
-    top: 0;
-    bottom: 0;
-    left: 26px;
-    right: auto;
-    width: 2px;
-    height: auto;
   }
   .program__step {
     flex-direction: row;
