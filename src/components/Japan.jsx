@@ -1,5 +1,4 @@
 import { honeymoon } from '../data/content.js'
-import { HeartDot } from './Decor.jsx'
 
 const japanImg = `${import.meta.env.BASE_URL}japao.jpg`
 
@@ -10,7 +9,6 @@ export default function Japan() {
         <div className="japan__body reveal">
           <span className="eyebrow">{honeymoon.eyebrow}</span>
           <h2 className="h1 japan__title">{honeymoon.title}</h2>
-          <HeartDot className="japan__heart" />
           <p className="japan__text">{honeymoon.text}</p>
         </div>
         <div className="japan__art reveal">
