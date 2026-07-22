@@ -1,8 +1,22 @@
+import { useState } from 'react'
 import { directions } from '../data/content.js'
 import { External } from './Icons.jsx'
 import { RopeDivider } from './Decor.jsx'
 
+// Build a Google Maps embed URL from a location's search link.
+function embedSrc(mapUrl) {
+  let q = ''
+  try {
+    q = new URL(mapUrl).searchParams.get('q') || ''
+  } catch {
+    q = ''
+  }
+  return `https://maps.google.com/maps?q=${encodeURIComponent(q)}&z=15&hl=pt&output=embed`
+}
+
 export default function HowToArrive() {
+  const [active, setActive] = useState(0)
+
   return (
     <section id="como-chegar" className="section section--alt">
       <div className="container">
@@ -15,9 +29,9 @@ export default function HowToArrive() {
         <div className="arrive">
           <div className="arrive__map reveal">
             <iframe
-              title="Mapa — Tavira"
+              title={`Mapa — ${directions[active].place}`}
               className="arrive__mapframe"
-              src="https://maps.google.com/maps?q=Igreja%20de%20Nossa%20Senhora%20do%20Carmo%2C%20Largo%20do%20Carmo%2C%20Tavira&z=14&hl=pt&output=embed"
+              src={embedSrc(directions[active].mapUrl)}
               loading="lazy"
               referrerPolicy="no-referrer-when-downgrade"
               allowFullScreen
@@ -25,14 +39,28 @@ export default function HowToArrive() {
           </div>
 
           <ol className="arrive__list reveal">
-            {directions.map((d) => (
-              <li key={d.n} className="arrive__row">
+            {directions.map((d, i) => (
+              <li
+                key={d.n}
+                className={`arrive__row ${i === active ? 'is-active' : ''}`}
+                onClick={() => setActive(i)}
+                onKeyDown={(e) => (e.key === 'Enter' || e.key === ' ') && (e.preventDefault(), setActive(i))}
+                role="button"
+                tabIndex={0}
+                aria-pressed={i === active}
+              >
                 <span className="arrive__num">{d.n}</span>
                 <div className="arrive__info">
                   <span className="arrive__place">{d.place}</span>
                   <span className="arrive__addr">{d.address}</span>
-                  <a href={d.mapUrl} target="_blank" rel="noreferrer" className="arrive__link">
-                    Ver mapa <External width="13" height="13" />
+                  <a
+                    href={d.mapUrl}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="arrive__link"
+                    onClick={(e) => e.stopPropagation()}
+                  >
+                    Abrir no Google Maps <External width="13" height="13" />
                   </a>
                 </div>
               </li>
