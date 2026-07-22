@@ -960,14 +960,15 @@
   .story__wave--h {
     display: none;
   }
-  /* Wavy spine down the left, beside the text */
+  /* Wavy spine down the left, beside the text. Explicit height (not auto)
+     so the SVG can't overflow past the timeline into the next section. */
   .story__wave--v {
     display: block;
     position: absolute;
-    top: 10px;
-    bottom: 10px;
-    left: 4px;
-    width: 48px;
+    top: 24px;
+    left: 6px;
+    width: 38px;
+    height: calc(100% - 48px);
   }
   .story__item {
     flex-direction: row;

@@ -10,7 +10,7 @@ function StoryWave() {
   for (let i = 1; i < hN; i++) hd += ` t ${hSeg} 0`
 
   const vSeg = 72
-  const vN = 12
+  const vN = 7
   let vd = `M16 0 q -10 ${vSeg / 2} 0 ${vSeg}`
   for (let i = 1; i < vN; i++) vd += ` t 0 ${vSeg}`
 
