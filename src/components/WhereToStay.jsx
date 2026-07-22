@@ -1,15 +1,16 @@
-import { hotels } from '../data/content.js'
+import { useT } from '../i18n.jsx'
 import { Star } from './Icons.jsx'
 import Placeholder from './Placeholder.jsx'
 
 export default function WhereToStay() {
+  const { hotels, ui } = useT()
   return (
     <section id="onde-ficar" className="section">
       <div className="container">
         <div className="section-head reveal">
-          <span className="eyebrow">Sugestões</span>
-          <h2 className="h2 script">Onde ficar</h2>
-          <p className="lead">Algumas opções a poucos minutos da quinta, para descansar depois da festa.</p>
+          <span className="eyebrow">{ui.stayEyebrow}</span>
+          <h2 className="h2 script">{ui.stayTitle}</h2>
+          <p className="lead">{ui.stayLead}</p>
         </div>
 
         <div className="hotels">
@@ -22,7 +23,7 @@ export default function WhereToStay() {
               )}
               <div className="hotel__body">
                 <h3 className="hotel__name">{h.name}</h3>
-                <span className="hotel__stars" aria-label={`${h.stars} estrelas`}>
+                <span className="hotel__stars" aria-label={`${h.stars}`}>
                   {Array.from({ length: h.stars }).map((_, k) => (
                     <Star key={k} width="13" height="13" />
                   ))}
@@ -32,7 +33,7 @@ export default function WhereToStay() {
                   {h.drive && <><br />{h.drive}</>}
                 </p>
                 <a className="btn btn--ghost hotel__btn" href={h.url} target="_blank" rel="noreferrer">
-                  Ver mais
+                  {ui.seeMore}
                 </a>
               </div>
             </article>

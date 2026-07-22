@@ -73,6 +73,39 @@
   vertical-align: 0.1em;
   margin-inline: 0.05em;
 }
+.nav__right {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+}
+.lang {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  font-family: var(--f-body);
+  font-size: 0.7rem;
+  letter-spacing: 0.1em;
+}
+.lang__btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0.25rem 0.15rem;
+  color: var(--cinza-claro);
+  font: inherit;
+  letter-spacing: inherit;
+  transition: color 0.2s;
+}
+.lang__btn:hover {
+  color: var(--corda);
+}
+.lang__btn.is-active {
+  color: var(--corda-escuro);
+  font-weight: 600;
+}
+.lang__sep {
+  color: var(--linho);
+}
 .nav__links {
   display: flex;
   gap: clamp(0.35rem, 1vw, 1.1rem);

@@ -1,8 +1,8 @@
-import { ceremony, celebration, program } from '../data/content.js'
-import { iconMap, Pin, External } from './Icons.jsx'
+import { useT } from '../i18n.jsx'
+import { iconMap, Pin } from './Icons.jsx'
 import Placeholder from './Placeholder.jsx'
 
-function VenueCard({ id, data, img, imgSrc }) {
+function VenueCard({ id, data, img, imgSrc, seeLocation }) {
   return (
     <article id={id} className="venue reveal">
       {imgSrc ? (
@@ -16,7 +16,7 @@ function VenueCard({ id, data, img, imgSrc }) {
         <h3 className="h3">{data.place}</h3>
         <p className="venue__addr">{data.address}</p>
         <a className="btn btn--ghost venue__map" href={data.mapUrl} target="_blank" rel="noreferrer">
-          <Pin width="16" height="16" /> Ver localização
+          <Pin width="16" height="16" /> {seeLocation}
         </a>
       </div>
     </article>
@@ -24,23 +24,24 @@ function VenueCard({ id, data, img, imgSrc }) {
 }
 
 export default function Wedding() {
+  const { ceremony, celebration, program, ui } = useT()
   return (
     <section id="cerimonia" className="section section--alt">
       <div className="container">
         <div className="section-head reveal">
-          <span className="eyebrow">O grande dia</span>
-          <h2 className="h2 script">O casamento</h2>
+          <span className="eyebrow">{ui.weddingEyebrow}</span>
+          <h2 className="h2 script">{ui.weddingTitle}</h2>
         </div>
 
         <div className="venues">
-          <VenueCard id="cerimonia-card" data={ceremony} imgSrc="cerimonia-igreja.jpg" />
-          <VenueCard id="celebracao" data={celebration} imgSrc="celebracao-quinta.jpg" />
+          <VenueCard id="cerimonia-card" data={ceremony} imgSrc="cerimonia-igreja.jpg" seeLocation={ui.seeLocation} />
+          <VenueCard id="celebracao" data={celebration} imgSrc="celebracao-quinta.jpg" seeLocation={ui.seeLocation} />
         </div>
 
         {/* Programa do dia */}
         <div id="programa" className="program reveal">
           <div className="program__head">
-            <span className="eyebrow">Programa do dia</span>
+            <span className="eyebrow">{ui.programEyebrow}</span>
           </div>
           <ol className="program__track">
             {program.map((p) => {

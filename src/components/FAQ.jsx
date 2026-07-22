@@ -1,16 +1,17 @@
 import { useState } from 'react'
-import { faqs } from '../data/content.js'
+import { useT } from '../i18n.jsx'
 import { Plus } from './Icons.jsx'
 
 export default function FAQ() {
+  const { faqs, ui } = useT()
   const [open, setOpen] = useState(null)
 
   return (
     <section id="faq" className="section section--alt">
       <div className="container faq">
         <div className="section-head reveal">
-          <span className="eyebrow">Antes de partir</span>
-          <h2 className="h2 script">Perguntas frequentes</h2>
+          <span className="eyebrow">{ui.faqEyebrow}</span>
+          <h2 className="h2 script">{ui.faqTitle}</h2>
         </div>
 
         <div className="faq__list reveal">

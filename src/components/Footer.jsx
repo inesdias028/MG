@@ -1,6 +1,7 @@
-import { couple, nav } from '../data/content.js'
+import { useT } from '../i18n.jsx'
 
 export default function Footer() {
+  const { couple, nav, ui } = useT()
   const go = (e, id) => {
     e.preventDefault()
     document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' })
@@ -13,7 +14,7 @@ export default function Footer() {
           {couple.bride} &amp; {couple.groom}
         </h2>
         <p className="footer__date">{couple.date}</p>
-        <p className="footer__tag">Obrigado por fazer parte da nossa viagem.</p>
+        <p className="footer__tag">{ui.footerTagline}</p>
 
         <nav className="footer__nav" aria-label="Rodapé">
           {nav.slice(1).map((n) => (

@@ -1,35 +1,37 @@
 import { useState } from 'react'
-import { directions } from '../data/content.js'
+import { useT, useLang } from '../i18n.jsx'
 import { External } from './Icons.jsx'
 
 // Build a Google Maps embed URL from a location's search link.
-function embedSrc(mapUrl) {
+function embedSrc(mapUrl, hl = 'pt') {
   let q = ''
   try {
     q = new URL(mapUrl).searchParams.get('q') || ''
   } catch {
     q = ''
   }
-  return `https://maps.google.com/maps?q=${encodeURIComponent(q)}&z=15&hl=pt&output=embed`
+  return `https://maps.google.com/maps?q=${encodeURIComponent(q)}&z=15&hl=${hl}&output=embed`
 }
 
 export default function HowToArrive() {
+  const { directions, ui } = useT()
+  const { lang } = useLang()
   const [active, setActive] = useState(0)
 
   return (
     <section id="como-chegar" className="section section--alt">
       <div className="container">
         <div className="section-head reveal">
-          <span className="eyebrow">Localização</span>
-          <h2 className="h2 script">Como chegar</h2>
+          <span className="eyebrow">{ui.arriveEyebrow}</span>
+          <h2 className="h2 script">{ui.arriveTitle}</h2>
         </div>
 
         <div className="arrive">
           <div className="arrive__map reveal">
             <iframe
-              title={`Mapa — ${directions[active].place}`}
+              title={`${ui.arriveTitle} — ${directions[active].place}`}
               className="arrive__mapframe"
-              src={embedSrc(directions[active].mapUrl)}
+              src={embedSrc(directions[active].mapUrl, lang)}
               loading="lazy"
               referrerPolicy="no-referrer-when-downgrade"
               allowFullScreen
@@ -58,7 +60,7 @@ export default function HowToArrive() {
                     className="arrive__link"
                     onClick={(e) => e.stopPropagation()}
                   >
-                    Abrir no Google Maps <External width="13" height="13" />
+                    {ui.openMaps} <External width="13" height="13" />
                   </a>
                 </div>
               </li>

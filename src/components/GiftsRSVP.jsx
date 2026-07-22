@@ -1,8 +1,10 @@
 import { useState } from 'react'
-import { gifts, rsvpEndpoint, googleForm } from '../data/content.js'
+import { rsvpEndpoint, googleForm } from '../data/content.js'
+import { useT } from '../i18n.jsx'
 import { Gift } from './Icons.jsx'
 
 export default function GiftsRSVP() {
+  const { gifts, rsvp, ui } = useT()
   const [sent, setSent] = useState(false)
   const [sending, setSending] = useState(false)
   const [copied, setCopied] = useState(false)
@@ -14,7 +16,7 @@ export default function GiftsRSVP() {
   const submit = async (e) => {
     e.preventDefault()
     if (!form.name.trim()) {
-      setError('Por favor, indique o seu nome.')
+      setError(rsvp.errorName)
       return
     }
     setError('')
@@ -56,7 +58,7 @@ export default function GiftsRSVP() {
         setSent(true)
       }
     } catch {
-      setError('Não foi possível enviar. Tente novamente ou contacte-nos diretamente.')
+      setError(rsvp.errorSend)
     } finally {
       setSending(false)
     }
@@ -82,10 +84,10 @@ export default function GiftsRSVP() {
           <p className="gifts__lead">{gifts.lead}</p>
           <p className="gifts__text">{gifts.text}</p>
           <div className="gifts__iban">
-            <span className="gifts__iban-label">IBAN</span>
+            <span className="gifts__iban-label">{ui.ibanLabel}</span>
             <code>{gifts.iban}</code>
             <button type="button" className="btn btn--ghost gifts__copy" onClick={copyIban}>
-              {copied ? 'Copiado ✓' : 'Copiar'}
+              {copied ? ui.copied : ui.copy}
             </button>
           </div>
         </div>
@@ -93,24 +95,24 @@ export default function GiftsRSVP() {
         {/* RSVP */}
         <div id="rsvp" className="rsvp reveal">
           <div className="rsvp__head">
-            <span className="eyebrow">RSVP</span>
-            <h2 className="h2 script">Confirma a tua presença</h2>
+            <span className="eyebrow">{rsvp.eyebrow}</span>
+            <h2 className="h2 script">{rsvp.title}</h2>
           </div>
 
           {sent ? (
             <div className="rsvp__thanks" role="status">
-              <h3 className="h3">Obrigado, {form.name.split(' ')[0]}!</h3>
-              <p>Recebemos a tua confirmação. Mal podemos esperar por celebrar contigo.</p>
+              <h3 className="h3">{rsvp.thanks(form.name.split(' ')[0])}</h3>
+              <p>{rsvp.thanksText}</p>
             </div>
           ) : (
             <form className="rsvp__form" onSubmit={submit} noValidate>
               <div className="field field--row">
                 <label className="field field--grow">
-                  <span>Nome completo</span>
-                  <input type="text" value={form.name} onChange={update('name')} placeholder="Nome completo" autoComplete="name" />
+                  <span>{rsvp.name}</span>
+                  <input type="text" value={form.name} onChange={update('name')} placeholder={rsvp.name} autoComplete="name" />
                 </label>
                 <label className="field">
-                  <span>Nº de convidados</span>
+                  <span>{rsvp.guests}</span>
                   <select value={form.guests} onChange={update('guests')}>
                     {[1, 2, 3, 4, 5].map((n) => (
                       <option key={n} value={n}>{n}</option>
@@ -119,16 +121,16 @@ export default function GiftsRSVP() {
                 </label>
               </div>
               <label className="field">
-                <span>Restrições alimentares</span>
-                <input type="text" value={form.diet} onChange={update('diet')} placeholder="Restrições alimentares (opcional)" />
+                <span>{rsvp.diet}</span>
+                <input type="text" value={form.diet} onChange={update('diet')} placeholder={rsvp.dietPlaceholder} />
               </label>
               <label className="field">
-                <span>Mensagem para os noivos</span>
-                <textarea rows="4" value={form.message} onChange={update('message')} placeholder="Mensagem (opcional)" />
+                <span>{rsvp.message}</span>
+                <textarea rows="4" value={form.message} onChange={update('message')} placeholder={rsvp.messagePlaceholder} />
               </label>
               {error && <p className="field__error">{error}</p>}
               <button type="submit" className="btn rsvp__submit" disabled={sending}>
-                {sending ? 'A enviar…' : 'Confirmar presença'}
+                {sending ? rsvp.sending : rsvp.submit}
               </button>
             </form>
           )}

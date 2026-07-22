@@ -1,4 +1,4 @@
-import { story } from '../data/content.js'
+import { useT } from '../i18n.jsx'
 import { iconMap } from './Icons.jsx'
 
 // Sea-wave lines connecting the timeline nodes: horizontal on desktop,
@@ -27,12 +27,13 @@ function StoryWave() {
 }
 
 export default function Story() {
+  const { story, ui } = useT()
   return (
     <section id="historia" className="section section--flush-top">
       <div className="container">
         <div className="section-head reveal">
-          <span className="eyebrow">O início de tudo</span>
-          <h2 className="h2 script">A nossa história</h2>
+          <span className="eyebrow">{ui.storyEyebrow}</span>
+          <h2 className="h2 script">{ui.storyTitle}</h2>
         </div>
 
         <ol className="story">
