@@ -1,7 +1,6 @@
 import { hotels } from '../data/content.js'
 import { Star } from './Icons.jsx'
 import Placeholder from './Placeholder.jsx'
-import { RopeDivider } from './Decor.jsx'
 
 export default function WhereToStay() {
   return (
@@ -11,7 +10,6 @@ export default function WhereToStay() {
           <span className="eyebrow">Sugestões</span>
           <h2 className="h2 script">Onde ficar</h2>
           <p className="lead">Algumas opções a poucos minutos da quinta, para descansar depois da festa.</p>
-          <RopeDivider width={220} className="section-head__rope" />
         </div>
 
         <div className="hotels">

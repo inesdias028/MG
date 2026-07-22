@@ -1,7 +1,6 @@
 import { ceremony, celebration, program } from '../data/content.js'
 import { iconMap, Pin, External } from './Icons.jsx'
 import Placeholder from './Placeholder.jsx'
-import { RopeDivider } from './Decor.jsx'
 
 function VenueCard({ id, data, img, imgSrc }) {
   return (
@@ -31,7 +30,6 @@ export default function Wedding() {
         <div className="section-head reveal">
           <span className="eyebrow">O grande dia</span>
           <h2 className="h2 script">O casamento</h2>
-          <RopeDivider width={220} className="section-head__rope" />
         </div>
 
         <div className="venues">
@@ -43,7 +41,6 @@ export default function Wedding() {
         <div id="programa" className="program reveal">
           <div className="program__head">
             <span className="eyebrow">Programa do dia</span>
-            <RopeDivider width={180} />
           </div>
           <ol className="program__track">
             {program.map((p) => {

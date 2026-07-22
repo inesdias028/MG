@@ -1,7 +1,6 @@
 import { useState } from 'react'
 import { gifts, rsvpEndpoint, googleForm } from '../data/content.js'
 import { Gift, Heart } from './Icons.jsx'
-import { RopeDivider } from './Decor.jsx'
 
 export default function GiftsRSVP() {
   const [sent, setSent] = useState(false)
@@ -96,7 +95,6 @@ export default function GiftsRSVP() {
           <div className="rsvp__head">
             <span className="eyebrow">RSVP</span>
             <h2 className="h2 script">Confirma a tua presença</h2>
-            <RopeDivider width={160} />
           </div>
 
           {sent ? (

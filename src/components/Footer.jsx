@@ -1,5 +1,5 @@
 import { couple, nav } from '../data/content.js'
-import { KnotEmblem, RopeDivider } from './Decor.jsx'
+import { KnotEmblem } from './Decor.jsx'
 
 export default function Footer() {
   const go = (e, id) => {
@@ -25,7 +25,6 @@ export default function Footer() {
           ))}
         </nav>
 
-        <RopeDivider width={280} className="footer__rope" />
         <p className="footer__place">{couple.region}</p>
       </div>
     </footer>

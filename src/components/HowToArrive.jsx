@@ -1,7 +1,6 @@
 import { useState } from 'react'
 import { directions } from '../data/content.js'
 import { External } from './Icons.jsx'
-import { RopeDivider } from './Decor.jsx'
 
 // Build a Google Maps embed URL from a location's search link.
 function embedSrc(mapUrl) {
@@ -23,7 +22,6 @@ export default function HowToArrive() {
         <div className="section-head reveal">
           <span className="eyebrow">Localização</span>
           <h2 className="h2 script">Como chegar</h2>
-          <RopeDivider width={220} className="section-head__rope" />
         </div>
 
         <div className="arrive">

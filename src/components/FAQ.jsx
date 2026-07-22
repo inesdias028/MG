@@ -1,7 +1,6 @@
 import { useState } from 'react'
 import { faqs } from '../data/content.js'
 import { Plus } from './Icons.jsx'
-import { RopeDivider } from './Decor.jsx'
 
 export default function FAQ() {
   const [open, setOpen] = useState(null)
@@ -12,7 +11,6 @@ export default function FAQ() {
         <div className="section-head reveal">
           <span className="eyebrow">Antes de partir</span>
           <h2 className="h2 script">Perguntas frequentes</h2>
-          <RopeDivider width={220} className="section-head__rope" />
         </div>
 
         <div className="faq__list reveal">
