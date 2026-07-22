@@ -342,6 +342,10 @@
   box-shadow: var(--shadow-md);
   border-color: var(--corda-escuro);
 }
+.story__content {
+  display: flex;
+  flex-direction: column;
+}
 .story__year {
   font-family: var(--f-display);
   font-size: 1.35rem;
@@ -951,19 +955,38 @@
 @media (max-width: 900px) {
   .story {
     grid-template-columns: 1fr;
-    gap: 2.4rem;
+    gap: 1.7rem;
   }
   .story__wave--h {
     display: none;
   }
+  /* Wavy spine down the left, beside the text */
   .story__wave--v {
     display: block;
     position: absolute;
-    top: 12px;
-    bottom: 12px;
-    left: 50%;
-    width: 46px;
-    transform: translateX(-50%);
+    top: 10px;
+    bottom: 10px;
+    left: 4px;
+    width: 48px;
+  }
+  .story__item {
+    flex-direction: row;
+    align-items: center;
+    text-align: left;
+    gap: 1rem;
+  }
+  .story__node {
+    margin-bottom: 0;
+    flex: none;
+  }
+  .story__content {
+    flex: 1;
+  }
+  .story__text {
+    max-width: none;
+  }
+  .story__year {
+    margin-bottom: 0.2rem;
   }
   .venues {
     grid-template-columns: 1fr;

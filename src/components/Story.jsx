@@ -44,8 +44,10 @@ export default function Story() {
                 <span className="story__node">
                   <Icon width="26" height="26" />
                 </span>
-                <span className="story__year">{s.year}</span>
-                <p className="story__text">{s.text}</p>
+                <div className="story__content">
+                  <span className="story__year">{s.year}</span>
+                  <p className="story__text">{s.text}</p>
+                </div>
               </li>
             )
           })}
