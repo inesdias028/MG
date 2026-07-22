@@ -13,11 +13,15 @@ export default function HowToArrive() {
         </div>
 
         <div className="arrive">
-          <div className="arrive__map reveal" aria-label="Mapa ilustrativo de Tavira">
-            <MapArt />
-            {directions.map((d) => (
-              <span key={d.n} className={`arrive__pin arrive__pin--${d.n}`}>{d.n}</span>
-            ))}
+          <div className="arrive__map reveal">
+            <iframe
+              title="Mapa — Tavira"
+              className="arrive__mapframe"
+              src="https://maps.google.com/maps?q=Igreja%20de%20Nossa%20Senhora%20do%20Carmo%2C%20Largo%20do%20Carmo%2C%20Tavira&z=14&hl=pt&output=embed"
+              loading="lazy"
+              referrerPolicy="no-referrer-when-downgrade"
+              allowFullScreen
+            />
           </div>
 
           <ol className="arrive__list reveal">
@@ -37,21 +41,5 @@ export default function HowToArrive() {
         </div>
       </div>
     </section>
-  )
-}
-
-// A soft stylised map — river, roads and land masses.
-function MapArt() {
-  return (
-    <svg viewBox="0 0 460 300" className="arrive__mapart" role="presentation" aria-hidden="true">
-      <rect width="460" height="300" fill="#eef2f0" />
-      <path d="M0 210 C 120 190, 160 250, 300 220 C 380 205, 420 240, 460 225 L460 300 L0 300 Z" fill="#cde0e8" opacity="0.7" />
-      <path d="M-10 150 C 90 140, 130 175, 220 150 C 320 122, 380 165, 470 140" fill="none" stroke="#a9cad8" strokeWidth="14" opacity="0.7" strokeLinecap="round" />
-      <g stroke="#d8cfc0" strokeWidth="3" fill="none" strokeLinecap="round" opacity="0.9">
-        <path d="M60 40 L 160 120 L 260 110 L 360 170" />
-        <path d="M120 260 L 200 180 L 300 200 L 420 120" />
-        <path d="M40 120 L 130 130 L 150 220" />
-      </g>
-    </svg>
   )
 }
