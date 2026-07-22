@@ -84,13 +84,8 @@ export const program = [
 ]
 
 export const dressCode = {
-  title: 'Formal Chic',
-  subtitle: 'Elegância descontraída.',
-  notes: [
-    'Vestidos compridos ou midi.',
-    'Fato escuro ou fato claro.',
-    'Evitar jeans, sapatilhas e roupa demasiado informal.',
-  ],
+  title: 'Formal',
+  notes: ['Evitar branco', 'Evitar cores das madrinhas', 'Evitar cor da gravata dos padrinhos'],
 }
 
 export const directions = [

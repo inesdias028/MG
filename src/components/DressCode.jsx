@@ -9,7 +9,6 @@ export default function DressCode() {
         <div className="dress__body reveal">
           <span className="eyebrow">Dress Code</span>
           <h2 className="h2 script">{dressCode.title}</h2>
-          <p className="dress__sub">{dressCode.subtitle}</p>
           <ul className="dress__list">
             {dressCode.notes.map((n) => (
               <li key={n}>{n}</li>
