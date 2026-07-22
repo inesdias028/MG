@@ -54,7 +54,7 @@ export const story = [
   { year: '2013', icon: 'anchor', text: 'Conhecemo-nos no mundo da vela.' },
   { year: '2024', icon: 'compass', text: 'Depois de 11 anos, começámos finalmente a navegar lado a lado.' },
   { year: '22.05.2026', icon: 'ring', text: 'E foi neste dia que nos pedimos para sempre.' },
-  { year: '22.05.2027', icon: 'heart', text: 'O dia em que queremos que façam parte da nossa maior aventura.' },
+  { year: '22.05.2027', icon: 'sailboat', text: 'O dia em que queremos que façam parte da nossa maior aventura.' },
 ]
 
 export const ceremony = {
@@ -80,7 +80,7 @@ export const program = [
   { time: '19h30', icon: 'dinner', label: 'Jantar' },
   { time: '22h00', icon: 'music', label: 'Abertura do baile' },
   { time: '23h30', icon: 'party', label: 'Festa' },
-  { time: '03h00', icon: 'heart', label: 'Última dança' },
+  { time: '03h00', icon: 'music', label: 'Última dança' },
 ]
 
 export const dressCode = {

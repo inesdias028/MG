@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { gifts, rsvpEndpoint, googleForm } from '../data/content.js'
-import { Gift, Heart } from './Icons.jsx'
+import { Gift } from './Icons.jsx'
 
 export default function GiftsRSVP() {
   const [sent, setSent] = useState(false)
@@ -99,7 +99,6 @@ export default function GiftsRSVP() {
 
           {sent ? (
             <div className="rsvp__thanks" role="status">
-              <Heart width="42" height="42" />
               <h3 className="h3">Obrigado, {form.name.split(' ')[0]}!</h3>
               <p>Recebemos a tua confirmação. Mal podemos esperar por celebrar contigo.</p>
             </div>

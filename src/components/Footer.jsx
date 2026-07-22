@@ -1,5 +1,4 @@
 import { couple, nav } from '../data/content.js'
-import { KnotEmblem } from './Decor.jsx'
 
 export default function Footer() {
   const go = (e, id) => {
@@ -10,7 +9,6 @@ export default function Footer() {
   return (
     <footer className="footer">
       <div className="container footer__inner">
-        <KnotEmblem size={64} className="footer__knot" />
         <h2 className="h1 footer__names">
           {couple.bride} &amp; {couple.groom}
         </h2>
