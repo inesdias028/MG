@@ -4,7 +4,7 @@ const dressImg = `${import.meta.env.BASE_URL}dresscode.jpg`
 
 export default function DressCode() {
   return (
-    <section id="dress-code" className="section">
+    <section id="dress-code" className="section section--flush-top">
       <div className="container dress">
         <div className="dress__body reveal">
           <span className="eyebrow">Dress Code</span>
