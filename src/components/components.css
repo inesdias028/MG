@@ -530,15 +530,16 @@
 /* ---------- Como chegar ---------- */
 .arrive {
   display: grid;
-  grid-template-columns: 1.3fr 1fr;
+  grid-template-columns: 1.6fr 1fr;
   gap: clamp(1.6rem, 4vw, 3rem);
-  align-items: start;
+  align-items: stretch;
 }
 .arrive__map {
   position: relative;
   border-radius: var(--radius);
   overflow: hidden;
   box-shadow: var(--shadow-sm);
+  min-height: 360px;
 }
 .arrive__mapframe {
   display: block;
